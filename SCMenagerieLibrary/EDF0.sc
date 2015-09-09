@@ -14,6 +14,12 @@ Creature_EDF0 {
 		^( instance ?? { instance = Creature_EDF0.new(-1, -1)});
 	}
 
+	*initClass {
+		StartUp.add {
+			Creature_EDF0.get();
+		};
+	}
+
 	init {| id, synthID |
 		this.id = id;
 		this.synthID = synthID;

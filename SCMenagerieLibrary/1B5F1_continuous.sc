@@ -14,6 +14,12 @@ Creature_1B5F1_continuous {
 		^( instance ?? { instance = Creature_1B5F1_continuous.new(-1, -1)});
 	}
 
+	*initClass {
+		StartUp.add {
+			Creature_1B5F1_continuous.get();
+		};
+	}
+
 	init {| id, synthID |
 		this.id = id;
 		this.synthID = synthID;

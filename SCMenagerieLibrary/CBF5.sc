@@ -14,6 +14,12 @@ Creature_CBF5 {
 		^( instance ?? { instance = Creature_CBF5.new(-1, -1)});
 	}
 
+	*initClass {
+		StartUp.add {
+			Creature_CBF5.get();
+		};
+	}
+
 	init {| id, synthID |
 		this.id = id;
 		this.synthID = synthID;

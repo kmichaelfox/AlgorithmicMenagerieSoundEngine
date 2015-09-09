@@ -140,3 +140,5 @@ x.stageWipe.permanent.postln;
 x.restart.permanent.postln;
 
 (-1).equals(2);
+
+x = MenagerieEngine("127.0.0.1", 12345);

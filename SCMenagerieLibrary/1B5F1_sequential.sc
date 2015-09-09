@@ -12,10 +12,17 @@ Creature_1B5F1_sequential {
 	}
 
 	*get {
-		^( instance ?? { instance = Creature_1B5F1_sequential.new(-1, -1)});
+		^( instance ?? { instance = Creature_1B5F1_sequential.new(-1, -1) });
+	}
+
+	*initClass {
+		StartUp.add {
+			Creature_1B5F1_sequential.get();
+		};
 	}
 
 	init {| id, synthID |
+		//if(instance.isNil, { instance = Creature_1B5F1_sequential.new(-1, -1) });
 		this.id = id;
 		this.synthID = synthID;
 

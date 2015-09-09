@@ -14,6 +14,12 @@ Creature_C99D {
 		^( instance ?? { instance = Creature_C99D.new(-1, -1)});
 	}
 
+	*initClass {
+		StartUp.add {
+			Creature_C99D.get();
+		};
+	}
+
 	init {| id, synthID |
 		this.id = id;
 		this.synthID = synthID;
