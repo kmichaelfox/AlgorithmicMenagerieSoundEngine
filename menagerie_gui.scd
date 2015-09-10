@@ -386,7 +386,7 @@ gui.creature_1B5F1sParam5Label = StaticText(
 .front;
 
 //
-// Creature CBF5
+// Creature CBF5 (7)
 //
 //
 
@@ -399,8 +399,127 @@ gui.creature_CBF5Label = StaticText(
 .background_(Color.gray(0.6))
 .front;
 
+gui.creature_CBF5LabelParam1 = NumberBox(
+	gui.w,
+	Rect(100 + (0 * 90), gui.spacingCoeff + 20 + (70 * 2), 70, 15))
+//.value_(440.0)
+.value_(Creature_CBF5.get.synthParams.centerFreqStart)
+.action_({ |obj|
+	Creature_CBF5.get.synthParams.centerFreqStart_(obj.value);
+})
+.front;
+
+gui.creature_CBF5Param1Label = StaticText(
+	gui.w,
+	Rect(100 + (0 * 90), gui.spacingCoeff + 20 + (70 * 2) + 15, 90, 15))
+.string_("Center Freq Start")
+.font_(Font("Helvetica", 10))
+.front;
+
+gui.creature_CBF5Param2 = NumberBox(
+	gui.w,
+	Rect(100 + (0 * 90), gui.spacingCoeff + 20 + (70 * 2) + 35, 70, 15))
+//.value_(112)
+.value_(Creature_CBF5.get.synthParams.freqStartScalar)
+.action_({ |obj|
+	Creature_CBF5.get.synthParams.freqStartScalar_(obj.value);
+})
+.front;
+
+gui.creature_CBF5Param2Label = StaticText(
+	gui.w,
+	Rect(100 + (0 * 90), gui.spacingCoeff + 20 + (70 * 2) + 50, 90, 15))
+.string_("Freq Start Scalar")
+.font_(Font("Helvetica", 10))
+.front;
+
+gui.creature_CBF5Param3 = NumberBox(
+	gui.w,
+	Rect(100 + (1 * 90), gui.spacingCoeff + 20 + (70 * 2), 70, 15))
+//.value_(56)
+.value_(Creature_CBF5.get.synthParams.centerFreqEnd)
+.action_({ |obj|
+	Creature_CBF5.get.synthParams.centerFreqEnd_(obj.value);
+})
+.front;
+
+gui.creature_CBF5Param3Label = StaticText(
+	gui.w,
+	Rect(100 + (1 * 90), gui.spacingCoeff + 20 + (70 * 2) + 15, 90, 15))
+.string_("Center Freq End")
+.font_(Font("Helvetica", 10))
+.front;
+
+gui.creature_CBF5Param4 = NumberBox(
+	gui.w,
+	Rect(100 + (1 * 90), gui.spacingCoeff + 20 + (70 * 2) + 35, 70, 15))
+//.value_(1000.0)
+.value_(Creature_CBF5.get.synthParams.freqEndScalar)
+.action_({ |obj|
+	Creature_CBF5.get.synthParams.freqEndScalar_(obj.value);
+})
+.front;
+
+gui.creature_CBF5Param4Label = StaticText(
+	gui.w,
+	Rect(100 + (1 * 90), gui.spacingCoeff + 20 + (70 * 2) + 50, 90, 15))
+.string_("Freq End Scalar")
+.font_(Font("Helvetica", 10))
+.front;
+
+gui.creature_CBF5Param5 = NumberBox(
+	gui.w,
+	Rect(100 + (2 * 90), gui.spacingCoeff + 20 + (70 * 2), 70, 15))
+//.value_(56)
+.value_(Creature_CBF5.get.synthParams.sustainScalar)
+.action_({ |obj|
+	Creature_CBF5.get.synthParams.sustainScalar_(obj.value);
+})
+.front;
+
+gui.creature_CBF5Param5Label = StaticText(
+	gui.w,
+	Rect(100 + (2 * 90), gui.spacingCoeff + 20 + (70 * 2) + 15, 90, 15))
+.string_("Sustain Scalar")
+.font_(Font("Helvetica", 10))
+.front;
+
+gui.creature_CBF5Param6 = NumberBox(
+	gui.w,
+	Rect(100 + (2 * 90), gui.spacingCoeff + 20 + (70 * 2) + 35, 70, 15))
+//.value_(1000.0)
+.value_(Creature_CBF5.get.synthParams.ampScalar)
+.action_({ |obj|
+	Creature_CBF5.get.synthParams.ampScalar_(obj.value);
+})
+.front;
+
+gui.creature_CBF5Param6Label = StaticText(
+	gui.w,
+	Rect(100 + (2 * 90), gui.spacingCoeff + 20 + (70 * 2) + 50, 90, 15))
+.string_("Amplitude Scalar")
+.font_(Font("Helvetica", 10))
+.front;
+
+gui.creature_CBF5Param7 = NumberBox(
+	gui.w,
+	Rect(100 + (3 * 90), gui.spacingCoeff + 20 + (70 * 2), 70, 15))
+//.value_(1000.0)
+.value_(Creature_CBF5.get.synthParams.delayOffsetScalar)
+.action_({ |obj|
+	Creature_CBF5.get.synthParams.delayOffsetScalar_(obj.value);
+})
+.front;
+
+gui.creature_CBF5Param7Label = StaticText(
+	gui.w,
+	Rect(100 + (3 * 90), gui.spacingCoeff + 20 + (70 * 2) + 15, 90, 15))
+.string_("Delay Offset Scalar")
+.font_(Font("Helvetica", 10))
+.front;
+
 //
-// Creature C99D
+// Creature C99D (9)
 //
 //
 
@@ -411,6 +530,159 @@ gui.creature_C99DLabel = StaticText(
 .font_(Font("Helvetica", 12))
 .align_(\left)
 .background_(Color.gray(0.6))
+.front;
+
+gui.creature_C99DLabelParam1 = NumberBox(
+	gui.w,
+	Rect(100 + (0 * 90), gui.spacingCoeff + 20 + (70 * 3), 70, 15))
+//.value_(440.0)
+.value_(Creature_C99D.get.synthParams.centerFreqStart)
+.action_({ |obj|
+	Creature_C99D.get.synthParams.centerFreqStart_(obj.value);
+})
+.front;
+
+gui.creature_C99DParam1Label = StaticText(
+	gui.w,
+	Rect(100 + (0 * 90), gui.spacingCoeff + 20 + (70 * 3) + 15, 90, 15))
+.string_("Center Freq Start")
+.font_(Font("Helvetica", 10))
+.front;
+
+gui.creature_C99DParam2 = NumberBox(
+	gui.w,
+	Rect(100 + (0 * 90), gui.spacingCoeff + 20 + (70 * 3) + 35, 70, 15))
+//.value_(112)
+.value_(Creature_C99D.get.synthParams.freqStartScalar)
+.action_({ |obj|
+	Creature_C99D.get.synthParams.freqStartScalar_(obj.value);
+})
+.front;
+
+gui.creature_C99DParam2Label = StaticText(
+	gui.w,
+	Rect(100 + (0 * 90), gui.spacingCoeff + 20 + (70 * 3) + 50, 90, 15))
+.string_("Freq Start Scalar")
+.font_(Font("Helvetica", 10))
+.front;
+
+gui.creature_C99DParam3 = NumberBox(
+	gui.w,
+	Rect(100 + (1 * 90), gui.spacingCoeff + 20 + (70 * 3), 70, 15))
+//.value_(56)
+.value_(Creature_C99D.get.synthParams.freqStartOffset)
+.action_({ |obj|
+	Creature_C99D.get.synthParams.freqStartOffset_(obj.value);
+})
+.front;
+
+gui.creature_C99DParam3Label = StaticText(
+	gui.w,
+	Rect(100 + (1 * 90), gui.spacingCoeff + 20 + (70 * 3) + 15, 90, 15))
+.string_("Freq Start Offset")
+.font_(Font("Helvetica", 10))
+.front;
+
+gui.creature_C99DParam4 = NumberBox(
+	gui.w,
+	Rect(100 + (1 * 90), gui.spacingCoeff + 20 + (70 * 3) + 35, 70, 15))
+//.value_(1000.0)
+.value_(Creature_C99D.get.synthParams.centerFreqEnd)
+.action_({ |obj|
+	Creature_C99D.get.synthParams.centerFreqEnd_(obj.value);
+})
+.front;
+
+gui.creature_C99DParam4Label = StaticText(
+	gui.w,
+	Rect(100 + (1 * 90), gui.spacingCoeff + 20 + (70 * 3) + 50, 90, 15))
+.string_("Center Freq End")
+.font_(Font("Helvetica", 10))
+.front;
+
+gui.creature_C99DParam5 = NumberBox(
+	gui.w,
+	Rect(100 + (2 * 90), gui.spacingCoeff + 20 + (70 * 3), 70, 15))
+//.value_(56)
+.value_(Creature_C99D.get.synthParams.freqEndScalar)
+.action_({ |obj|
+	Creature_C99D.get.synthParams.freqEndScalar_(obj.value);
+})
+.front;
+
+gui.creature_C99DParam5Label = StaticText(
+	gui.w,
+	Rect(100 + (2 * 90), gui.spacingCoeff + 20 + (70 * 3) + 15, 90, 15))
+.string_("Freq End Scalar")
+.font_(Font("Helvetica", 10))
+.front;
+
+gui.creature_C99DParam6 = NumberBox(
+	gui.w,
+	Rect(100 + (2 * 90), gui.spacingCoeff + 20 + (70 * 3) + 35, 70, 15))
+//.value_(1000.0)
+.value_(Creature_C99D.get.synthParams.freqEndOffset)
+.action_({ |obj|
+	Creature_C99D.get.synthParams.freqEndOffset_(obj.value);
+})
+.front;
+
+gui.creature_C99DParam6Label = StaticText(
+	gui.w,
+	Rect(100 + (2 * 90), gui.spacingCoeff + 20 + (70 * 3) + 50, 90, 15))
+.string_("Freq End Offset")
+.font_(Font("Helvetica", 10))
+.front;
+
+gui.creature_C99DParam7 = NumberBox(
+	gui.w,
+	Rect(100 + (3 * 90), gui.spacingCoeff + 20 + (70 * 3), 70, 15))
+//.value_(1000.0)
+.value_(Creature_C99D.get.synthParams.sustainScalar)
+.action_({ |obj|
+	Creature_C99D.get.synthParams.sustainScalar_(obj.value);
+})
+.front;
+
+gui.creature_C99DParam7Label = StaticText(
+	gui.w,
+	Rect(100 + (3 * 90), gui.spacingCoeff + 20 + (70 * 3) + 15, 90, 15))
+.string_("Sustain Scalar")
+.font_(Font("Helvetica", 10))
+.front;
+
+gui.creature_C99DParam8 = NumberBox(
+	gui.w,
+	Rect(100 + (3 * 90), gui.spacingCoeff + 20 + (70 * 3) + 35, 70, 15))
+//.value_(56)
+.value_(Creature_C99D.get.synthParams.ampScalar)
+.action_({ |obj|
+	Creature_C99D.get.synthParams.ampScalar_(obj.value);
+})
+.front;
+
+gui.creature_C99DParam8Label = StaticText(
+	gui.w,
+	Rect(100 + (3 * 90), gui.spacingCoeff + 20 + (70 * 3) + 50, 90, 15))
+.string_("Amplitude Scalar")
+.font_(Font("Helvetica", 10))
+.front;
+
+gui.creature_C99DParam9 = NumberBox(
+	gui.w,
+	Rect(100 + (4 * 90), gui.spacingCoeff + 20 + (70 * 3), 70, 15))
+//.value_(1000.0)
+.value_(Creature_C99D.get.synthParams.delayOffsetScalar)
+.action_({ |obj|
+	Creature_C99D.get.synthParams.delayOffsetScalar_(obj.value);
+})
+.front;
+
+gui.creature_C99DParam9Label = StaticText(
+	gui.w,
+	Rect(100 + (4 * 90), gui.spacingCoeff + 20 + (70 * 3) + 15, 90, 15))
+.string_("Delay Offset Scalar")
+.font_(Font("Helvetica", 10))
 .front;
 
 //
@@ -427,8 +699,110 @@ gui.creature_EDF0Label = StaticText(
 .background_(Color.gray(0.6))
 .front;
 
+gui.creature_EDF0LabelParam1 = NumberBox(
+	gui.w,
+	Rect(100, gui.spacingCoeff + 20 + (70 * 4), 70, 15))
+//.value_(440.0)
+.value_(Creature_EDF0.get.synthParams.centerFreq)
+.action_({ |obj|
+	Creature_EDF0.get.synthParams.centerFreq_(obj.value);
+})
+.front;
+
+gui.creature_EDF0Param1Label = StaticText(
+	gui.w,
+	Rect(100, gui.spacingCoeff + 20 + (70 * 4) + 15, 90, 15))
+.string_("Center Freq")
+.font_(Font("Helvetica", 10))
+.front;
+
+gui.creature_EDF0Param2 = NumberBox(
+	gui.w,
+	Rect(100, gui.spacingCoeff + 20 + (70 * 4) + 35, 70, 15))
+//.value_(112)
+.value_(Creature_EDF0.get.synthParams.freqScalar)
+.action_({ |obj|
+	Creature_EDF0.get.synthParams.freqScalar_(obj.value);
+})
+.front;
+
+gui.creature_EDF0Param2Label = StaticText(
+	gui.w,
+	Rect(100, gui.spacingCoeff + 20 + (70 * 4) + 50, 90, 15))
+.string_("Freq Scalar")
+.font_(Font("Helvetica", 10))
+.front;
+
+gui.creature_EDF0Param3 = NumberBox(
+	gui.w,
+	Rect(190, gui.spacingCoeff + 20 + (70 * 4), 70, 15))
+//.value_(56)
+.value_(Creature_EDF0.get.synthParams.freqOffset)
+.action_({ |obj|
+	Creature_EDF0.get.synthParams.freqOffset_(obj.value);
+})
+.front;
+
+gui.creature_EDF0Param3Label = StaticText(
+	gui.w,
+	Rect(190, gui.spacingCoeff + 20 + (70 * 4) + 15, 90, 15))
+.string_("Freq Offset")
+.font_(Font("Helvetica", 10))
+.front;
+
+gui.creature_EDF0Param4 = NumberBox(
+	gui.w,
+	Rect(190, gui.spacingCoeff + 20 + (70 * 4) + 35, 70, 15))
+//.value_(1000.0)
+.value_(Creature_EDF0.get.synthParams.sustainScalar)
+.action_({ |obj|
+	Creature_EDF0.get.synthParams.sustainScalar_(obj.value);
+})
+.front;
+
+gui.creature_EDF0Param4Label = StaticText(
+	gui.w,
+	Rect(190, gui.spacingCoeff + 20 + (70 * 4) + 50, 90, 15))
+.string_("Sustain Scalar")
+.font_(Font("Helvetica", 10))
+.front;
+
+gui.creature_EDF0Param5 = NumberBox(
+	gui.w,
+	Rect(280, gui.spacingCoeff + 20 + (70 * 4), 70, 15))
+//.value_(56)
+.value_(Creature_EDF0.get.synthParams.ampScalar)
+.action_({ |obj|
+	Creature_EDF0.get.synthParams.ampScalar_(obj.value);
+})
+.front;
+
+gui.creature_EDF0Param5Label = StaticText(
+	gui.w,
+	Rect(280, gui.spacingCoeff + 20 + (70 * 4) + 15, 90, 15))
+.string_("Amplitude Scalar")
+.font_(Font("Helvetica", 10))
+.front;
+
+gui.creature_EDF0Param6 = NumberBox(
+	gui.w,
+	Rect(280, gui.spacingCoeff + 20 + (70 * 4) + 35, 70, 15))
+//.value_(1000.0)
+.value_(Creature_EDF0.get.synthParams.delayOffsetScalar)
+.action_({ |obj|
+	Creature_EDF0.get.synthParams.delayOffsetScalar_(obj.value);
+})
+.front;
+
+gui.creature_EDF0Param6Label = StaticText(
+	gui.w,
+	Rect(280, gui.spacingCoeff + 20 + (70 * 4) + 50, 90, 15))
+.string_("Delay Offset Scalar")
+.font_(Font("Helvetica", 10))
+.front;
+
 //
-// Creature CB91
+// Creature CB91 (6)
 //
 //
 
@@ -441,8 +815,110 @@ gui.creature_CB91Label = StaticText(
 .background_(Color.gray(0.6))
 .front;
 
+gui.creature_CB91LabelParam1 = NumberBox(
+	gui.w,
+	Rect(100 + (0 * 90), gui.spacingCoeff + 20 + (70 * 5), 70, 15))
+//.value_(440.0)
+.value_(Creature_CB91.get.synthParams.centerFreq)
+.action_({ |obj|
+	Creature_CB91.get.synthParams.centerFreq_(obj.value);
+})
+.front;
+
+gui.creature_CB91Param1Label = StaticText(
+	gui.w,
+	Rect(100 + (0 * 90), gui.spacingCoeff + 20 + (70 * 5) + 15, 90, 15))
+.string_("Center Freq")
+.font_(Font("Helvetica", 10))
+.front;
+
+gui.creature_CB91Param2 = NumberBox(
+	gui.w,
+	Rect(100 + (0 * 90), gui.spacingCoeff + 20 + (70 * 5) + 35, 70, 15))
+//.value_(112)
+.value_(Creature_CB91.get.synthParams.freqScalar)
+.action_({ |obj|
+	Creature_CB91.get.synthParams.freqScalar_(obj.value);
+})
+.front;
+
+gui.creature_CB91Param2Label = StaticText(
+	gui.w,
+	Rect(100 + (0 * 90), gui.spacingCoeff + 20 + (70 * 5) + 50, 90, 15))
+.string_("Freq Scalar")
+.font_(Font("Helvetica", 10))
+.front;
+
+gui.creature_CB91Param3 = NumberBox(
+	gui.w,
+	Rect(100 + (1 * 90), gui.spacingCoeff + 20 + (70 * 5), 70, 15))
+//.value_(56)
+.value_(Creature_CB91.get.synthParams.freqOffset)
+.action_({ |obj|
+	Creature_CB91.get.synthParams.freqOffset_(obj.value);
+})
+.front;
+
+gui.creature_CB91Param3Label = StaticText(
+	gui.w,
+	Rect(100 + (1 * 90), gui.spacingCoeff + 20 + (70 * 5) + 15, 90, 15))
+.string_("Freq Offset")
+.font_(Font("Helvetica", 10))
+.front;
+
+gui.creature_CB91Param4 = NumberBox(
+	gui.w,
+	Rect(100 + (1 * 90), gui.spacingCoeff + 20 + (70 * 5) + 35, 70, 15))
+//.value_(1000.0)
+.value_(Creature_CB91.get.synthParams.sustainScalar)
+.action_({ |obj|
+	Creature_CB91.get.synthParams.sustainScalar_(obj.value);
+})
+.front;
+
+gui.creature_CB91Param4Label = StaticText(
+	gui.w,
+	Rect(100 + (1 * 90), gui.spacingCoeff + 20 + (70 * 5) + 50, 90, 15))
+.string_("Sustain Scalar")
+.font_(Font("Helvetica", 10))
+.front;
+
+gui.creature_CB91Param5 = NumberBox(
+	gui.w,
+	Rect(100 + (2 * 90), gui.spacingCoeff + 20 + (70 * 5), 70, 15))
+//.value_(56)
+.value_(Creature_CB91.get.synthParams.ampScalar)
+.action_({ |obj|
+	Creature_CB91.get.synthParams.ampScalar_(obj.value);
+})
+.front;
+
+gui.creature_CB91Param5Label = StaticText(
+	gui.w,
+	Rect(100 + (2 * 90), gui.spacingCoeff + 20 + (70 * 5) + 15, 90, 15))
+.string_("Amplitude Scalar")
+.font_(Font("Helvetica", 10))
+.front;
+
+gui.creature_CB91Param6 = NumberBox(
+	gui.w,
+	Rect(100 + (2 * 90), gui.spacingCoeff + 20 + (70 * 5) + 35, 70, 15))
+//.value_(1000.0)
+.value_(Creature_CB91.get.synthParams.delayOffsetScalar)
+.action_({ |obj|
+	Creature_CB91.get.synthParams.delayOffsetScalar_(obj.value);
+})
+.front;
+
+gui.creature_CB91Param6Label = StaticText(
+	gui.w,
+	Rect(100 + (2 * 90), gui.spacingCoeff + 20 + (70 * 5) + 50, 90, 15))
+.string_("Delay Offset Scalar")
+.font_(Font("Helvetica", 10))
+.front;
+
 //
-// Creature CB2D
+// Creature CB2D (6)
 //
 //
 
@@ -455,8 +931,110 @@ gui.creature_CB2DLabel = StaticText(
 .background_(Color.gray(0.6))
 .front;
 
+gui.creature_CB2DLabelParam1 = NumberBox(
+	gui.w,
+	Rect(100 + (0 * 90), gui.spacingCoeff + 20 + (70 * 6), 70, 15))
+//.value_(440.0)
+.value_(Creature_CB2D.get.synthParams.centerFreq)
+.action_({ |obj|
+	Creature_CB2D.get.synthParams.centerFreq_(obj.value);
+})
+.front;
+
+gui.creature_CB2DParam1Label = StaticText(
+	gui.w,
+	Rect(100 + (0 * 90), gui.spacingCoeff + 20 + (70 * 6) + 15, 90, 15))
+.string_("Center Freq")
+.font_(Font("Helvetica", 10))
+.front;
+
+gui.creature_CB2DParam2 = NumberBox(
+	gui.w,
+	Rect(100 + (0 * 90), gui.spacingCoeff + 20 + (70 * 6) + 35, 70, 15))
+//.value_(112)
+.value_(Creature_CB2D.get.synthParams.freqScalar)
+.action_({ |obj|
+	Creature_CB2D.get.synthParams.freqScalar_(obj.value);
+})
+.front;
+
+gui.creature_CB2DParam2Label = StaticText(
+	gui.w,
+	Rect(100 + (0 * 90), gui.spacingCoeff + 20 + (70 * 6) + 50, 90, 15))
+.string_("Freq Scalar")
+.font_(Font("Helvetica", 10))
+.front;
+
+gui.creature_CB2DParam3 = NumberBox(
+	gui.w,
+	Rect(100 + (1 * 90), gui.spacingCoeff + 20 + (70 * 6), 70, 15))
+//.value_(56)
+.value_(Creature_CB2D.get.synthParams.freqOffset)
+.action_({ |obj|
+	Creature_CB2D.get.synthParams.freqOffset_(obj.value);
+})
+.front;
+
+gui.creature_CB2DParam3Label = StaticText(
+	gui.w,
+	Rect(100 + (1 * 90), gui.spacingCoeff + 20 + (70 * 6) + 15, 90, 15))
+.string_("Freq Offset")
+.font_(Font("Helvetica", 10))
+.front;
+
+gui.creature_CB2DParam4 = NumberBox(
+	gui.w,
+	Rect(100 + (1 * 90), gui.spacingCoeff + 20 + (70 * 6) + 35, 70, 15))
+//.value_(1000.0)
+.value_(Creature_CB2D.get.synthParams.sustainScalar)
+.action_({ |obj|
+	Creature_CB2D.get.synthParams.sustainScalar_(obj.value);
+})
+.front;
+
+gui.creature_CB2DParam4Label = StaticText(
+	gui.w,
+	Rect(100 + (1 * 90), gui.spacingCoeff + 20 + (70 * 6) + 50, 90, 15))
+.string_("Sustain Scalar")
+.font_(Font("Helvetica", 10))
+.front;
+
+gui.creature_CB2DParam5 = NumberBox(
+	gui.w,
+	Rect(100 + (2 * 90), gui.spacingCoeff + 20 + (70 * 6), 70, 15))
+//.value_(56)
+.value_(Creature_CB2D.get.synthParams.ampScalar)
+.action_({ |obj|
+	Creature_CB2D.get.synthParams.ampScalar_(obj.value);
+})
+.front;
+
+gui.creature_CB2DParam5Label = StaticText(
+	gui.w,
+	Rect(100 + (2 * 90), gui.spacingCoeff + 20 + (70 * 6) + 15, 90, 15))
+.string_("Amplitude Scalar")
+.font_(Font("Helvetica", 10))
+.front;
+
+gui.creature_CB2DParam6 = NumberBox(
+	gui.w,
+	Rect(100 + (2 * 90), gui.spacingCoeff + 20 + (70 * 6) + 35, 70, 15))
+//.value_(1000.0)
+.value_(Creature_CB2D.get.synthParams.delayOffsetScalar)
+.action_({ |obj|
+	Creature_CB2D.get.synthParams.delayOffsetScalar_(obj.value);
+})
+.front;
+
+gui.creature_CB2DParam6Label = StaticText(
+	gui.w,
+	Rect(100 + (2 * 90), gui.spacingCoeff + 20 + (70 * 6) + 50, 90, 15))
+.string_("Delay Offset Scalar")
+.font_(Font("Helvetica", 10))
+.front;
+
 //
-// Creature 1D789
+// Creature 1D789 (5)
 //
 //
 
@@ -467,6 +1045,91 @@ gui.creature_1D789Label = StaticText(
 .font_(Font("Helvetica", 12))
 .align_(\left)
 .background_(Color.gray(0.6))
+.front;
+
+gui.creature_1D789Param1 = NumberBox(
+	gui.w,
+	Rect(100, gui.spacingCoeff + 20 + (70 * 7), 70, 15))
+//.value_(440.0)
+.value_(Creature_1D789.get.synthParams.centerFreq)
+.action_({ |obj|
+	Creature_1D789.get.synthParams.centerFreq_(obj.value);
+})
+.front;
+
+gui.creature_1D789Param1Label = StaticText(
+	gui.w,
+	Rect(100, gui.spacingCoeff + 20 + (70 * 7) + 15, 90, 15))
+.string_("Center Freq")
+.font_(Font("Helvetica", 10))
+.front;
+
+gui.creature_1D789Param2 = NumberBox(
+	gui.w,
+	Rect(100, gui.spacingCoeff + 20 + (70 * 7) + 35, 70, 15))
+//.value_(112)
+.value_(Creature_1D789.get.synthParams.delayOffsetScalar)
+.action_({ |obj|
+	Creature_1D789.get.synthParams.delayOffsetScalar_(obj.value);
+})
+.front;
+
+gui.creature_1D789Param2Label = StaticText(
+	gui.w,
+	Rect(100, gui.spacingCoeff + 20 + (70 * 7) + 50, 90, 15))
+.string_("Delay Offset Scalar")
+.font_(Font("Helvetica", 10))
+.front;
+
+gui.creature_1D789Param3 = NumberBox(
+	gui.w,
+	Rect(190, gui.spacingCoeff + 20 + (70 * 7), 70, 15))
+//.value_(56)
+.value_(Creature_1D789.get.synthParams.freqScalar)
+.action_({ |obj|
+	Creature_1D789.get.synthParams.freqScalar_(obj.value);
+})
+.front;
+
+gui.creature_1D789Param3Label = StaticText(
+	gui.w,
+	Rect(190, gui.spacingCoeff + 20 + (70 * 7) + 15, 90, 15))
+.string_("Freq Scalar")
+.font_(Font("Helvetica", 10))
+.front;
+
+gui.creature_1D789Param4 = NumberBox(
+	gui.w,
+	Rect(190, gui.spacingCoeff + 20 + (70 * 7) + 35, 70, 15))
+//.value_(1000.0)
+.value_(Creature_1D789.get.synthParams.sustainScalar)
+.action_({ |obj|
+	Creature_1D789.get.synthParams.sustainScalar_(obj.value);
+})
+.front;
+
+gui.creature_1D789Param4Label = StaticText(
+	gui.w,
+	Rect(190, gui.spacingCoeff + 20 + (70 * 7) + 50, 90, 15))
+.string_("Sustain Scalar")
+.font_(Font("Helvetica", 10))
+.front;
+
+gui.creature_1D789Param5 = NumberBox(
+	gui.w,
+	Rect(280, gui.spacingCoeff + 20 + (70 * 7), 70, 15))
+//.value_(56)
+.value_(Creature_1D789.get.synthParams.ampScalar)
+.action_({ |obj|
+	Creature_1D789.get.synthParams.ampScalar_(obj.value);
+})
+.front;
+
+gui.creature_1D789Param5Label = StaticText(
+	gui.w,
+	Rect(280, gui.spacingCoeff + 20 + (70 * 7) + 15, 90, 15))
+.string_("Amplitude Scalar")
+.font_(Font("Helvetica", 10))
 .front;
 
 //

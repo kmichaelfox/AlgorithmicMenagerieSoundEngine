@@ -28,6 +28,19 @@ Creature_C99D {
 		this.routineList = List.new;
 
 		this.synthParams = ();
+
+		this.synthParams.centerFreqStart = 440;
+		this.synthParams.freqStartScalar = 56;
+		this.synthParams.freqStartOffset = 112;
+
+		this.synthParams.centerFreqEnd = 440;
+		this.synthParams.freqEndScalar = 56;
+		this.synthParams.freqEndOffset = 112;
+
+		this.synthParams.sustainScalar = 1000.0;
+		this.synthParams.ampScalar = 56;
+
+		this.synthParams.delayOffsetScalar = 10.0;
 	}
 
 	update { | input |
@@ -51,15 +64,19 @@ Creature_C99D {
 							loop({
 								Server.local.sendMsg("s_new",
 									this.synthID, -1, 0, 0,
-									\freq_start, (((112-currentNode.at(0))/56)*440),
-									\freq_end, (((112-currentNode.at(0))/56)*440)*(currentNode.at(6)),
-									\sustain, (currentNode.at(1)/1000.0).clip(0.002, 0.1),
-									\amp, ((currentNode.at(2)/56).sqrt.clip(0, 1) * 0.02 + 0.01).clip(0, 0.03),
+									\freq_start, (((instance.synthParams.freqStartOffset-currentNode.at(0))/
+										instance.synthParams.freqStartScalar)*instance.synthParams.centerFreqStart),
+									\freq_end, (((instance.synthParams.freqEndOffset-currentNode.at(0))/
+										instance.synthParams.freqEndScalar)*
+										instance.synthParams.centerFreqEnd)*(currentNode.at(6)),
+									\sustain, (currentNode.at(1)/instance.synthParams.sustainScalar).clip(0.002, 0.1),
+									\amp, ((currentNode.at(2)/instance.synthParams.ampScalar)
+										.sqrt.clip(0, 1) * 0.02 + 0.01).clip(0, 0.03),
 									\x, currentNode.at(3),
 									\y, currentNode.at(4),
 									\z, currentNode.at(5)
 								);
-								((currentNode.at(1)/10.0).clip(0.01,1)).wait;
+								((currentNode.at(1)/instance.synthParams.delayOffsetScalar).clip(0.01,1)).wait;
 							})
 						}).play;
 					);

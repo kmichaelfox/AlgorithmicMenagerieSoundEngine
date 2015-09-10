@@ -28,6 +28,15 @@ Creature_CB91 {
 		this.routineList = List.new;
 
 		this.synthParams = ();
+
+		this.synthParams.centerFreq = 440;
+		this.synthParams.freqScalar = 56;
+		this.synthParams.freqOffset = 112;
+
+		this.synthParams.sustainScalar = 1000.0;
+		this.synthParams.ampScalar = 56;
+
+		this.synthParams.delayOffsetScalar = 10.0;
 	}
 
 	update { | input |
@@ -51,14 +60,16 @@ Creature_CB91 {
 							loop({
 								Server.local.sendMsg("s_new",
 									this.synthID, -1, 0, 0,
-									\freq, (((112-currentNode.at(0))/56)*440),
-									\sustain, (currentNode.at(1)/1000.0).clip(0.002, 0.1),
-									\amp, ((currentNode.at(2)/56).sqrt.clip(0, 1) * 0.02 + 0.01).clip(0, 0.02),
+									\freq, (((instance.synthParams.freqOffset-currentNode.at(0))/
+										instance.synthParams.freqScalar)*instance.synthParams.centerFreq),
+									\sustain, (currentNode.at(1)/instance.synthParams.sustainScalar).clip(0.002, 0.1),
+									\amp, ((currentNode.at(2)/instance.synthParams.ampScalar)
+										.sqrt.clip(0, 1) * 0.02 + 0.01).clip(0, 0.02),
 									\x, currentNode.at(3),
 									\y, currentNode.at(4),
 									\z, currentNode.at(5)
 								);
-								((currentNode.at(1)/10.0).clip(0.01, 1)).wait;
+								((currentNode.at(1)/instance.synthParams.delayOffsetScalar).clip(0.01, 1)).wait;
 							})
 						}).play;
 					);

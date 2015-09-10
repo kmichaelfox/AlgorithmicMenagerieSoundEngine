@@ -28,6 +28,16 @@ Creature_EDF0 {
 		this.routineList = List.new;
 
 		this.synthParams = ();
+
+		this.synthParams.centerFreq = 440;
+		this.synthParams.freqScalar = 1326;
+		this.synthParams.freqOffset = 0.5;
+
+		this.synthParams.sustainScalar = 100.0;
+
+		this.synthParams.ampScalar = 80;
+
+		this.synthParams.delayOffsetScalar = 10.0;
 	}
 
 	update { | input |
@@ -51,14 +61,16 @@ Creature_EDF0 {
 							loop({
 								Server.local.sendMsg("s_new",
 									this.synthID, -1, 0, 0,
-									\freq, (((currentNode.at(2)/(1396))+0.5)*440),
-									\sustain, (currentNode.at(1)/100.0),
-									\amp, ((currentNode.at(0)/80).sqrt * 0.02 + 0.01).clip(0, 0.02),
+									\freq, (((currentNode.at(2)/instance.synthParams.freqScalar)+
+										instance.synthParams.freqOffset)*instance.synthParams.centerFreq),
+									\sustain, (currentNode.at(1)/instance.synthParams.sustainScalar),
+									\amp, ((currentNode.at(0)/instance.synthParams.ampScalar)
+										.sqrt * 0.02 + 0.01).clip(0, 0.02),
 									\x, currentNode.at(3),
 									\y, currentNode.at(4),
 									\z, currentNode.at(5)
 								);
-								((currentNode.at(1)/10.0).clip(0.01, 1)).wait;
+								((currentNode.at(1)/instance.synthParams.delayOffsetScalar).clip(0.01, 1)).wait;
 							})
 						}).play;
 					);
