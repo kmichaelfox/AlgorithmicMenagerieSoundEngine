@@ -7,25 +7,116 @@ SynthDef(\speakerTest, {
 	Out.ar(0, sig);
 }).add;
 
+SynthDef(\gabor0Wall, {| out, freq = 440, sustain = 0.02, amp = 0.02, pan, x = 0, y = 0, z = 0 |
+	var env = EnvGen.ar(Env.sine(sustain, amp), doneAction: 2);
+	var sound = SinOsc.ar(freq) * env;
+	OffsetOut.ar(out, [
+		// channel 1
+		MulAdd(sound, ((1 - ((-960-x).abs/1920))*((1120+z)/1120))),
+		// channel 2
+		MulAdd(sound, ((1 - ((960-x).abs/1920))*((1120+z)/1120)))]
+	)
+}, \ir.dup(5)).load();
+
+SynthDef(\gaborGlissWall, {| out, freq_start = 440, freq_end = 880, sustain = 0.02, amp = 0.02, pan, x = 0, y = 0, z = 0 |
+	var env = EnvGen.ar(Env.sine(sustain, amp), doneAction: 2);
+	var sound = SinOsc.ar(XLine.kr(freq_start, freq_end, sustain, doneAction: 2)) * env;
+	OffsetOut.ar(out, [
+		// channel 1
+		MulAdd(sound, ((1 - ((-960-x).abs/1920))*((1120+z)/1120))),
+		// channel 2
+		MulAdd(sound, ((1 - ((960-x).abs/1920))*((1120+z)/1120)))]
+	)
+}, \ir.dup(5)).load();
+
 Window.closeAll;
 
 gui.w = Window.new("menagerie", Rect(75, 550, 1100, 720))
 .front;
 
-gui.titleLabel = StaticText(gui.w, Rect(30, 20, 600, 50))
+StaticText(gui.w, Rect(30, 20, 600, 50))
 .string_("Algorithmic Menagerie Sound Engine")
 .font_(Font("Helvetica", 20))
 //.background_(Color.white)
 .align_(\left)
 .front;
 
-gui.deviceListLabel = StaticText(gui.w, Rect(550, 10, 100, 50))
+gui.customAddr = "192.168.1.86";
+
+StaticText(gui.w, Rect(400, 10, 100, 20))
+.string_("IP Address")
+.font_(Font("Helvetica", 12))
+.front;
+
+gui.customAddrValue = TextField(gui.w, Rect(425, 30, 105, 20))
+.string_("localhost")
+.align_(\center)
+.stringColor_(Color.gray(0.6))
+.background_(Color.gray(0.8))
+.enabled_(false)
+.front;
+
+Button(gui.w, Rect(400, 30, 20, 20))
+.states_([
+	["o", Color.black],
+	["x", Color.blue]
+])
+.action_({ |state|
+	if(state.value == 0,
+		{
+			gui.customAddrValue.string_("localhost")
+			.stringColor_(Color.gray(0.6))
+			.background_(Color.gray(0.8))
+			.enabled_(false);
+
+			//gui.customAddrValue.string.postln;
+
+			gui.startButton.action_({
+				gui.customAddrValue.string.postln;
+				MenagerieEngine(gui.customAddrValue.string, 12345);
+			});
+		}, {
+			gui.customAddrValue.string_(gui.customAddr)
+			.stringColor_(Color.black)
+			.background_(Color.gray(0.95))
+			.enabled_(true);
+
+			//gui.customAddrValue.string.postln;
+
+			gui.startButton.action_({
+				gui.customAddrValue.string.postln;
+				MenagerieEngine(gui.customAddrValue.string, 12345);
+			});
+		}
+	)
+})
+.front;
+
+gui.startButton = Button(gui.w, Rect(400, 55, 60, 25))
+.states_([
+	["Start", Color.gray(0.6), Color.gray(0.8)]
+])
+.enabled_(false)
+.front;
+
+gui.stopButton = Button(gui.w, Rect(470, 55, 60, 25))
+.states_([
+	["Stop", Color.black, Color.gray(0.8)]
+])
+.action_({
+	CmdPeriod.run();
+	"stopped".postln;
+})
+.enabled_(true)
+.front;
+
+StaticText(gui.w, Rect(550, 20, 100, 50))
 .string_("Device List")
 .font_(Font("Helvetica", 12))
 .align_(\left)
 .front;
 
-gui.deviceListMenu = PopUpMenu(gui.w, Rect(550, 45, 155, 25))
+gui.deviceListMenu = PopUpMenu(gui.w, Rect(550, 55, 155, 25))
 .items_(ServerOptions.outDevices)
 .action_({
 	arg dev;
@@ -43,7 +134,7 @@ gui.deviceListMenu = PopUpMenu(gui.w, Rect(550, 45, 155, 25))
 })
 .front;
 
-gui.statusLabel = StaticText(gui.w, Rect(785, 10, 100, 50))
+StaticText(gui.w, Rect(785, 20, 100, 50))
 .string_("Server Status")
 .font_(Font("Helvetica", 12))
 .align_(\left)
@@ -51,16 +142,25 @@ gui.statusLabel = StaticText(gui.w, Rect(785, 10, 100, 50))
 
 if(s.serverRunning,
 	{
-		gui.statusText = StaticText(gui.w, Rect(785, 45, 140, 25))
+		gui.statusText = StaticText(gui.w, Rect(785, 55, 140, 25))
 		.string_("  Server is Booted")
 		.font_(Font("Helvetica", 12))
 		.stringColor_(Color.green)
 		.background_(Color.black)
 		.front;
+
+		gui.startButton.states_([
+			["Start", Color.black, Color.gray(0.8)]
+		])
+		.action_({
+			MenagerieEngine(gui.customAddrValue.string, 12345);
+		})
+		.enabled_(true)
+		.front;
 	},{
 		if(s.serverBooting,
 			{
-				gui.statusText = StaticText(gui.w, Rect(785, 45, 140, 25))
+				gui.statusText = StaticText(gui.w, Rect(785, 55, 140, 25))
 				.string_("  Server is Booting...")
 				.font_(Font("Helvetica", 12))
 				.stringColor_(Color.yellow)
@@ -68,16 +168,24 @@ if(s.serverRunning,
 				.front;
 
 				s.doWhenBooted({
-					gui.statusText = StaticText(gui.w, Rect(785, 45, 140, 25))
-					.string_("  Server is Booted")
+					gui.statusText.string_("  Server is Booted")
 					.font_(Font("Helvetica", 12))
 					.stringColor_(Color.green)
 					.background_(Color.black)
 					.front;
+
+					gui.startButton.states_([
+						["Start", Color.black, Color.gray(0.8)]
+					])
+					.action_({
+						MenagerieEngine(gui.customAddrValue.string, 12345);
+					})
+					.enabled_(true)
+					.front;
 				});
 			},
 			{
-				gui.statusText = StaticText(gui.w, Rect(785, 45, 140, 25))
+				gui.statusText = StaticText(gui.w, Rect(785, 55, 140, 25))
 				.string_("  Server is Stopped")
 				.font_(Font("Helvetica", 12))
 				.stringColor_(Color.red)
@@ -88,57 +196,79 @@ if(s.serverRunning,
 	}
 );
 
-gui.rebootButton = Button(gui.w, Rect(715, 45, 60, 25))
+gui.rebootButton = Button(gui.w, Rect(715, 55, 60, 25))
 .states_([["Reboot", Color.black, Color.gray(0.8)]])
 .action_({
 	if((s.serverRunning || s.serverBooting),
 		{
-			gui.statusText = StaticText(gui.w, Rect(785, 45, 140, 25))
-			.string_("  Server is Booting...")
+			gui.statusText.string_("  Server is Booting...")
 			.font_(Font("Helvetica", 12))
 			.stringColor_(Color.yellow)
 			.background_(Color.black)
 			.front;
+
+			gui.startButton.states_([
+				["Start", Color.gray(0.6), Color.gray(0.8)]
+			])
+			.enabled_(false);
+
 			s.quit;
 			s.doWhenBooted({
-				gui.statusText = StaticText(gui.w, Rect(785, 45, 140, 25))
-				.string_("  Server is Booted")
+				gui.statusText.string_("  Server is Booted")
 				.font_(Font("Helvetica", 12))
 				.stringColor_(Color.green)
 				.background_(Color.black)
 				.front;
+
+				gui.startButton.states_([
+					["Start", Color.black, Color.gray(0.8)]
+				])
+				.action_({
+					MenagerieEngine(gui.customAddrValue.string, 12345);
+				})
+				.enabled_(true)
+				.front;
 			});
+
 			s.boot;
 		},
 		{
 			s.boot;
-			gui.statusText = StaticText(gui.w, Rect(785, 45, 140, 25))
-			.string_("  Server is Booting...")
+			gui.statusText.string_("  Server is Booting...")
 			.font_(Font("Helvetica", 12))
 			.stringColor_(Color.yellow)
 			.background_(Color.black)
 			.front;
+
 			s.reboot;
+
 			s.doWhenBooted({
-				gui.statusText = StaticText(gui.w, Rect(785, 45, 140, 25))
-				.string_("  Server is Booted")
+				gui.statusText.string_("  Server is Booted")
 				.font_(Font("Helvetica", 12))
 				.stringColor_(Color.green)
 				.background_(Color.black)
 				.front;
+
+				gui.startButton.states_([
+					["Start", Color.black, Color.gray(0.8)]
+				])
+				.action_({
+					MenagerieEngine(gui.customAddrValue.string, 12345);
+				})
+				.enabled_(true);
 			});
 		}
 	);
 })
 .front;
 
-gui.testNoiseLabel = StaticText(gui.w, Rect(948, 4, 110, 50))
+StaticText(gui.w, Rect(948, 14, 110, 50))
 .string_("Test Noise\n(L)                  (R)")
 .font_(Font("Helvetica", 12))
 .align_(\center)
 .front;
 
-gui.testNoiseLeftButton = Button(gui.w, Rect(935, 45, 60, 25))
+gui.testNoiseLeftButton = Button(gui.w, Rect(935, 55, 60, 25))
 .states_([
 	["OFF", Color.black, Color.gray(0.8)],
 	["ON", Color.red, Color.gray(0.8)]
@@ -152,7 +282,7 @@ gui.testNoiseLeftButton = Button(gui.w, Rect(935, 45, 60, 25))
 })
 .front;
 
-gui.testNoiseRightButton = Button(gui.w, Rect(1010, 45, 60, 25))
+gui.testNoiseRightButton = Button(gui.w, Rect(1010, 55, 60, 25))
 .states_([
 	["OFF", Color.black, Color.gray(0.8)],
 	["ON", Color.red, Color.gray(0.8)]
@@ -165,6 +295,8 @@ gui.testNoiseRightButton = Button(gui.w, Rect(1010, 45, 60, 25))
 	);
 })
 .front;
+
+
 
 gui.spacingCoeff = 70;
 gui.labelWidth = 1060;

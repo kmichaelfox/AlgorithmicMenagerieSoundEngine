@@ -73,7 +73,7 @@ Creature_CBF5 {
 									\y, currentNode.at(4),
 									\z, currentNode.at(5)
 								);
-								((currentNode.at(1)/instance.delayOffsetScalar).clip(0.01,1)).wait;
+								((currentNode.at(1)/instance.synthParams.delayOffsetScalar).clip(0.01,1)).wait;
 							})
 						}).play;
 					);
