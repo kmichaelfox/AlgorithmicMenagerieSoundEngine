@@ -1,3 +1,5 @@
+/*RUN*/
+
 (
 var gui = gui ? ();
 
@@ -16,7 +18,7 @@ SynthDef(\gabor0Wall, {| out, freq = 440, sustain = 0.02, amp = 0.02, pan, x = 0
 		// channel 2
 		MulAdd(sound, ((1 - ((960-x).abs/1920))*((1120+z)/1120)))]
 	)
-}, \ir.dup(5)).load();
+}, \ir.dup(5)).add;
 
 SynthDef(\gaborGlissWall, {| out, freq_start = 440, freq_end = 880, sustain = 0.02, amp = 0.02, pan, x = 0, y = 0, z = 0 |
 	var env = EnvGen.ar(Env.sine(sustain, amp), doneAction: 2);
@@ -27,11 +29,11 @@ SynthDef(\gaborGlissWall, {| out, freq_start = 440, freq_end = 880, sustain = 0.
 		// channel 2
 		MulAdd(sound, ((1 - ((960-x).abs/1920))*((1120+z)/1120)))]
 	)
-}, \ir.dup(5)).load();
+}, \ir.dup(5)).add;
 
 Window.closeAll;
 
-gui.w = Window.new("menagerie", Rect(75, 550, 1100, 720))
+gui.w = Window.new("menagerie", Rect(75, 10, 1100, 720))
 .front;
 
 StaticText(gui.w, Rect(30, 20, 600, 50))
@@ -117,7 +119,7 @@ StaticText(gui.w, Rect(550, 20, 100, 50))
 .front;
 
 gui.deviceListMenu = PopUpMenu(gui.w, Rect(550, 55, 155, 25))
-.items_(ServerOptions.outDevices)
+.items_("Using defaults")
 .action_({
 	arg dev;
 
@@ -132,6 +134,7 @@ gui.deviceListMenu = PopUpMenu(gui.w, Rect(550, 55, 155, 25))
 		}
 	);
 })
+.enabled_(false)
 .front;
 
 StaticText(gui.w, Rect(785, 20, 100, 50))
@@ -1054,7 +1057,7 @@ gui.creature_CB91Param6Label = StaticText(
 //
 //
 
-gui.creature_CB2DLabel = StaticText(
+StaticText(
 	gui.w,
 	Rect(20, gui.spacingCoeff * 7 + 20, gui.labelWidth, gui.labelHeight))
 .string_("   CB2D")
@@ -1073,7 +1076,7 @@ gui.creature_CB2DLabelParam1 = NumberBox(
 })
 .front;
 
-gui.creature_CB2DParam1Label = StaticText(
+StaticText(
 	gui.w,
 	Rect(100 + (0 * 90), gui.spacingCoeff + 20 + (70 * 6) + 15, 90, 15))
 .string_("Center Freq")
@@ -1090,7 +1093,7 @@ gui.creature_CB2DParam2 = NumberBox(
 })
 .front;
 
-gui.creature_CB2DParam2Label = StaticText(
+StaticText(
 	gui.w,
 	Rect(100 + (0 * 90), gui.spacingCoeff + 20 + (70 * 6) + 50, 90, 15))
 .string_("Freq Scalar")
@@ -1107,7 +1110,7 @@ gui.creature_CB2DParam3 = NumberBox(
 })
 .front;
 
-gui.creature_CB2DParam3Label = StaticText(
+StaticText(
 	gui.w,
 	Rect(100 + (1 * 90), gui.spacingCoeff + 20 + (70 * 6) + 15, 90, 15))
 .string_("Freq Offset")
@@ -1124,7 +1127,7 @@ gui.creature_CB2DParam4 = NumberBox(
 })
 .front;
 
-gui.creature_CB2DParam4Label = StaticText(
+StaticText(
 	gui.w,
 	Rect(100 + (1 * 90), gui.spacingCoeff + 20 + (70 * 6) + 50, 90, 15))
 .string_("Sustain Scalar")
@@ -1141,7 +1144,7 @@ gui.creature_CB2DParam5 = NumberBox(
 })
 .front;
 
-gui.creature_CB2DParam5Label = StaticText(
+StaticText(
 	gui.w,
 	Rect(100 + (2 * 90), gui.spacingCoeff + 20 + (70 * 6) + 15, 90, 15))
 .string_("Amplitude Scalar")
@@ -1158,7 +1161,7 @@ gui.creature_CB2DParam6 = NumberBox(
 })
 .front;
 
-gui.creature_CB2DParam6Label = StaticText(
+StaticText(
 	gui.w,
 	Rect(100 + (2 * 90), gui.spacingCoeff + 20 + (70 * 6) + 50, 90, 15))
 .string_("Delay Offset Scalar")
@@ -1170,7 +1173,7 @@ gui.creature_CB2DParam6Label = StaticText(
 //
 //
 
-gui.creature_1D789Label = StaticText(
+StaticText(
 	gui.w,
 	Rect(20, gui.spacingCoeff * 8 + 20, gui.labelWidth, gui.labelHeight))
 .string_("   1D789")
@@ -1189,7 +1192,7 @@ gui.creature_1D789Param1 = NumberBox(
 })
 .front;
 
-gui.creature_1D789Param1Label = StaticText(
+StaticText(
 	gui.w,
 	Rect(100, gui.spacingCoeff + 20 + (70 * 7) + 15, 90, 15))
 .string_("Center Freq")
@@ -1206,7 +1209,7 @@ gui.creature_1D789Param2 = NumberBox(
 })
 .front;
 
-gui.creature_1D789Param2Label = StaticText(
+StaticText(
 	gui.w,
 	Rect(100, gui.spacingCoeff + 20 + (70 * 7) + 50, 90, 15))
 .string_("Delay Offset Scalar")
@@ -1223,7 +1226,7 @@ gui.creature_1D789Param3 = NumberBox(
 })
 .front;
 
-gui.creature_1D789Param3Label = StaticText(
+StaticText(
 	gui.w,
 	Rect(190, gui.spacingCoeff + 20 + (70 * 7) + 15, 90, 15))
 .string_("Freq Scalar")
@@ -1240,7 +1243,7 @@ gui.creature_1D789Param4 = NumberBox(
 })
 .front;
 
-gui.creature_1D789Param4Label = StaticText(
+StaticText(
 	gui.w,
 	Rect(190, gui.spacingCoeff + 20 + (70 * 7) + 50, 90, 15))
 .string_("Sustain Scalar")
@@ -1257,7 +1260,7 @@ gui.creature_1D789Param5 = NumberBox(
 })
 .front;
 
-gui.creature_1D789Param5Label = StaticText(
+StaticText(
 	gui.w,
 	Rect(280, gui.spacingCoeff + 20 + (70 * 7) + 15, 90, 15))
 .string_("Amplitude Scalar")
@@ -1269,7 +1272,7 @@ gui.creature_1D789Param5Label = StaticText(
 //
 //
 
-gui.creature_1B5F1cLabel = StaticText(
+StaticText(
 	gui.w,
 	Rect(20, gui.spacingCoeff * 9 + 20, gui.labelWidth, gui.labelHeight))
 .string_("   1B5F1c")
@@ -1288,7 +1291,7 @@ gui.creature_1B5F1cParam1 = NumberBox(
 })
 .front;
 
-gui.creature_1B5F1cParam1Label = StaticText(
+StaticText(
 	gui.w,
 	Rect(100, gui.spacingCoeff + 20 + (70 * 8) + 15, 90, 15))
 .string_("Center Freq")
@@ -1305,7 +1308,7 @@ gui.creature_1B5F1cParam2 = NumberBox(
 })
 .front;
 
-gui.creature_1B5F1cParam2Label = StaticText(
+StaticText(
 	gui.w,
 	Rect(100, gui.spacingCoeff + 20 + (70 * 8) + 50, 90, 15))
 .string_("Delay Offset Scalar")
@@ -1322,7 +1325,7 @@ gui.creature_1B5F1cParam3 = NumberBox(
 })
 .front;
 
-gui.creature_1B5F1cParam3Label = StaticText(
+StaticText(
 	gui.w,
 	Rect(190, gui.spacingCoeff + 20 + (70 * 8) + 15, 90, 15))
 .string_("Freq Scalar")
@@ -1339,7 +1342,7 @@ gui.creature_1B5F1cParam4 = NumberBox(
 })
 .front;
 
-gui.creature_1B5F1cParam4Label = StaticText(
+StaticText(
 	gui.w,
 	Rect(190, gui.spacingCoeff + 20 + (70 * 8) + 50, 90, 15))
 .string_("Sustain Scalar")
@@ -1356,7 +1359,7 @@ gui.creature_1B5F1cParam5 = NumberBox(
 })
 .front;
 
-gui.creature_1B5F1cParam5Label = StaticText(
+StaticText(
 	gui.w,
 	Rect(280, gui.spacingCoeff + 20 + (70 * 8) + 15, 90, 15))
 .string_("Amplitude Scalar")
