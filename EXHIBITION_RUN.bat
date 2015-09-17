@@ -1,7 +1,7 @@
 @echo off
 
-if exist "C:\Program Files(x86)\SuperCollider*\sclang.exe" (
-	"C:\Program Files(x86)\SuperCollider*\sclang.exe" "C:\Users\%USERNAME%\AppData\Local\SuperCollider\exhibition_run.scd"
+if exist "C:\Program Files (x86)\SuperCollider*\sclang.exe" (
+	"C:\Program Files (x86)\SuperCollider*\sclang.exe" "C:\Users\%USERNAME%\AppData\Local\SuperCollider\exhibition_run.scd"
 ) else (
 	"C:\Program Files\SuperCollider*\sclang.exe" "C:\Users\%USERNAME%\AppData\Local\SuperCollider\exhibition_run.scd"
 )
